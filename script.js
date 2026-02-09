@@ -161,7 +161,7 @@ function createToolCard(tool) {
     ).join('');
     
     return `
-        <div class="tool-card">
+        <div class="tool-card" onclick="openModal(${tool.id})">
             <div class="card-header">
                 <div class="tool-icon">${tool.icon}</div>
                 <h3 class="tool-title">${tool.name}</h3>
@@ -175,16 +175,133 @@ function createToolCard(tool) {
             </div>
             
             <div class="card-footer">
-                <a href="${tool.link}" target="_blank" class="btn btn-primary" rel="noopener noreferrer">
+                <button class="btn btn-primary" onclick="event.stopPropagation(); window.open('${tool.link}', '_blank')">
                     사용하기 →
-                </a>
-                <button class="btn btn-secondary" onclick="copyLink('${tool.link}')">
+                </button>
+                <button class="btn btn-secondary" onclick="event.stopPropagation(); copyLink('${tool.link}')">
                     링크 복사
                 </button>
             </div>
         </div>
     `;
 }
+
+// 모달 열기
+function openModal(toolId) {
+    const tool = allTools.find(t => t.id === toolId);
+    if (!tool) return;
+    
+    const modal = document.getElementById('toolModal');
+    
+    // 기본 정보
+    document.getElementById('modalIcon').textContent = tool.icon;
+    document.getElementById('modalTitle').textContent = tool.name;
+    document.getElementById('modalCompany').textContent = tool.company || '정보 없음';
+    document.getElementById('modalDate').textContent = tool.releaseDate || '출시일 정보 없음';
+    document.getElementById('modalDescription').textContent = tool.description;
+    document.getElementById('modalLink').href = tool.link;
+    
+    // 가격 배지
+    const priceText = {
+        'free': '완전 무료',
+        'freemium': '무료 + 유료 플랜',
+        'paid': '유료 전용'
+    };
+    document.getElementById('modalPriceBadge').textContent = priceText[tool.price];
+    
+    // 상세 설명
+    const detailedSection = document.getElementById('detailedSection');
+    if (tool.detailedDescription) {
+        document.getElementById('modalDetailedDesc').textContent = tool.detailedDescription;
+        detailedSection.style.display = 'block';
+    } else {
+        detailedSection.style.display = 'none';
+    }
+    
+    // 가격 정보
+    const pricingSection = document.getElementById('pricingSection');
+    const pricingGrid = document.getElementById('modalPricing');
+    if (tool.pricingDetails) {
+        let pricingHTML = '';
+        for (const [key, value] of Object.entries(tool.pricingDetails)) {
+            pricingHTML += `
+                <div class="pricing-item">
+                    <div class="pricing-title">${key.toUpperCase()}</div>
+                    <div class="pricing-desc">${value}</div>
+                </div>
+            `;
+        }
+        pricingGrid.innerHTML = pricingHTML;
+        pricingSection.style.display = 'block';
+    } else {
+        pricingSection.style.display = 'none';
+    }
+    
+    // 장점
+    const prosSection = document.getElementById('prosSection');
+    const prosList = document.getElementById('modalPros');
+    if (tool.pros && tool.pros.length > 0) {
+        prosList.innerHTML = tool.pros.map(pro => `<li>${pro}</li>`).join('');
+        prosSection.style.display = 'block';
+    } else {
+        prosSection.style.display = 'none';
+    }
+    
+    // 단점
+    const consSection = document.getElementById('consSection');
+    const consList = document.getElementById('modalCons');
+    if (tool.cons && tool.cons.length > 0) {
+        consList.innerHTML = tool.cons.map(con => `<li>${con}</li>`).join('');
+        consSection.style.display = 'block';
+    } else {
+        consSection.style.display = 'none';
+    }
+    
+    // 추천 대상
+    const recommendedSection = document.getElementById('recommendedSection');
+    const recommendedList = document.getElementById('modalRecommended');
+    if (tool.recommendedFor && tool.recommendedFor.length > 0) {
+        recommendedList.innerHTML = tool.recommendedFor.map(rec => `<li>${rec}</li>`).join('');
+        recommendedSection.style.display = 'block';
+    } else {
+        recommendedSection.style.display = 'none';
+    }
+    
+    // 태그
+    const tagsHTML = tool.tags.map(tag => 
+        `<span class="modal-tag">${tag}</span>`
+    ).join('');
+    document.getElementById('modalTags').innerHTML = tagsHTML;
+    
+    // 모달 표시
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// 모달 닫기
+function closeModal() {
+    const modal = document.getElementById('toolModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// 모달 링크 복사
+function copyModalLink() {
+    const link = document.getElementById('modalLink').href;
+    navigator.clipboard.writeText(link).then(() => {
+        showToast('링크가 복사되었습니다! ✅');
+    }).catch(err => {
+        console.error('복사 실패:', err);
+        showToast('복사에 실패했습니다 ❌');
+    });
+}
+
+// ESC 키로 모달 닫기
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+});
 
 // 링크 복사 기능
 function copyLink(link) {

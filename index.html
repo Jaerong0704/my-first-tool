@@ -100,6 +100,72 @@
     <!-- 맨 위로 버튼 -->
     <button class="scroll-top" id="scrollTop">↑</button>
 
+    <!-- 상세 정보 모달 -->
+    <div class="modal" id="toolModal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            
+            <div class="modal-header">
+                <div class="modal-icon" id="modalIcon">🤖</div>
+                <div>
+                    <h2 class="modal-title" id="modalTitle">도구 이름</h2>
+                    <div class="modal-meta">
+                        <span class="modal-company" id="modalCompany">회사명</span>
+                        <span class="modal-separator">•</span>
+                        <span class="modal-date" id="modalDate">출시일</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-section">
+                    <div class="modal-price-badge" id="modalPriceBadge">무료</div>
+                    <p class="modal-description" id="modalDescription">설명</p>
+                </div>
+
+                <div class="modal-section" id="detailedSection">
+                    <h3>📋 상세 설명</h3>
+                    <p id="modalDetailedDesc">상세 설명이 여기에 표시됩니다.</p>
+                </div>
+
+                <div class="modal-section" id="pricingSection">
+                    <h3>💰 가격 정보</h3>
+                    <div class="pricing-grid" id="modalPricing"></div>
+                </div>
+
+                <div class="modal-section" id="prosSection">
+                    <h3>✅ 장점</h3>
+                    <ul class="pros-list" id="modalPros"></ul>
+                </div>
+
+                <div class="modal-section" id="consSection">
+                    <h3>❌ 단점</h3>
+                    <ul class="cons-list" id="modalCons"></ul>
+                </div>
+
+                <div class="modal-section" id="recommendedSection">
+                    <h3>🎯 추천 대상</h3>
+                    <ul class="recommended-list" id="modalRecommended"></ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🏷️ 태그</h3>
+                    <div class="modal-tags" id="modalTags"></div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" id="modalLink" target="_blank" class="btn btn-primary modal-btn">
+                    사용하기 →
+                </a>
+                <button class="btn btn-secondary modal-btn" onclick="copyModalLink()">
+                    링크 복사
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
