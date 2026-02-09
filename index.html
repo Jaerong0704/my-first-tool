@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools Hub - 최고의 AI 도구 모음</title>
+    <meta name="description" content="2026년 최신 AI 도구들을 한 곳에서! ChatGPT, Midjourney 등 카테고리별 AI 도구 추천과 사용법">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">
+                    <span class="gradient-text">AI Tools Hub</span>
+                </h1>
+                <p class="tagline">2026년 최고의 AI 도구를 한 곳에서</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- 검색 & 필터 섹션 -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="AI 도구 검색... (예: 이미지, 글쓰기, 코딩)" class="search-input">
+                <button class="search-btn">🔍</button>
+            </div>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-category="all">전체</button>
+                <button class="filter-btn" data-category="writing">✍️ 글쓰기</button>
+                <button class="filter-btn" data-category="image">🎨 이미지</button>
+                <button class="filter-btn" data-category="video">🎬 영상</button>
+                <button class="filter-btn" data-category="coding">💻 코딩</button>
+                <button class="filter-btn" data-category="audio">🎵 음악/음성</button>
+                <button class="filter-btn" data-category="productivity">⚡ 생산성</button>
+                <button class="filter-btn" data-category="design">🎨 디자인</button>
+            </div>
+
+            <div class="filter-tags">
+                <button class="tag-btn active" data-price="all">전체</button>
+                <button class="tag-btn" data-price="free">무료만</button>
+                <button class="tag-btn" data-price="paid">유료만</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 통계 섹션 -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalTools">150+</div>
+                    <div class="stat-label">AI 도구</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">카테고리</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">매일</div>
+                    <div class="stat-label">업데이트</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI 도구 카드 섹션 -->
+    <section class="tools-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>인기 AI 도구</h2>
+                <p class="result-count"><span id="resultCount">0</span>개의 도구를 찾았습니다</p>
+            </div>
+            
+            <div class="tools-grid" id="toolsGrid">
+                <!-- JavaScript로 동적 생성 -->
+            </div>
+
+            <div class="no-results" id="noResults" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <h3>검색 결과가 없습니다</h3>
+                <p>다른 키워드로 검색해보세요</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 AI Tools Hub. All rights reserved.</p>
+                <p class="footer-note">매일 새로운 AI 도구가 추가됩니다 🚀</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 맨 위로 버튼 -->
+    <button class="scroll-top" id="scrollTop">↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
