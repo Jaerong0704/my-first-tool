@@ -3,102 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Tools Hub - 최고의 AI 도구 모음</title>
-    <meta name="description" content="2026년 최신 AI 도구들을 한 곳에서! ChatGPT, Midjourney 등 카테고리별 AI 도구 추천과 사용법">
+    
+    <!-- SEO Meta Tags -->
+    <title>AI Tools Hub - 2026 최고의 AI 도구 200개 모음 | ChatGPT, Midjourney, Claude</title>
+    <meta name="description" content="2026년 최신 AI 도구 200개를 한 곳에서! ChatGPT, Midjourney, Claude, Runway 등 글쓰기, 이미지, 영상, 코딩 AI 도구 비교 및 추천. 무료 AI 도구 정보 제공.">
+    <meta name="keywords" content="AI 도구, 인공지능, ChatGPT, Midjourney, Claude, AI 추천, 무료 AI, AI 이미지 생성, AI 글쓰기, AI 코딩, Stable Diffusion, DALL-E, Suno, AI 음악, AI 영상">
+    <meta name="author" content="AI Tools Hub">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Korean">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jaerong0704.github.io/my-first-tool/">
+    <meta property="og:title" content="AI Tools Hub - 2026 최고의 AI 도구 200개 모음">
+    <meta property="og:description" content="ChatGPT, Midjourney 등 200개의 AI 도구를 카테고리별로 비교하고 추천받으세요. 무료 AI 도구 정보 제공.">
+    <meta property="og:image" content="https://jaerong0704.github.io/my-first-tool/og-image.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://jaerong0704.github.io/my-first-tool/">
+    <meta property="twitter:title" content="AI Tools Hub - 2026 최고의 AI 도구 200개 모음">
+    <meta property="twitter:description" content="ChatGPT, Midjourney 등 200개의 AI 도구를 카테고리별로 비교하고 추천받으세요.">
+    <meta property="twitter:image" content="https://jaerong0704.github.io/my-first-tool/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 헤더 -->
-    <header class="header">
+    <!-- 로딩 화면 -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">AI Tools Hub 로딩 중...</p>
+        </div>
+    </div>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero">
+        <div class="hero-background"></div>
         <div class="container">
-            <div class="header-content">
-                <h1 class="logo">
+            <div class="hero-content">
+                <h1 class="hero-title">
                     <span class="gradient-text">AI Tools Hub</span>
                 </h1>
-                <p class="tagline">2026년 최고의 AI 도구를 한 곳에서</p>
+                <p class="hero-subtitle">2026년 최고의 AI 도구 200개를 한 곳에서 발견하세요</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="toolCount">200</div>
+                        <div class="stat-label">AI 도구</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">카테고리</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="freeCount">0</div>
+                        <div class="stat-label">무료 도구</div>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <button class="btn-hero btn-primary" onclick="scrollToTools()">
+                        도구 탐색하기 →
+                    </button>
+                    <button class="btn-hero btn-secondary" onclick="toggleFavoritesPanel()">
+                        ⭐ 즐겨찾기
+                    </button>
+                </div>
             </div>
         </div>
-    </header>
+        <div class="hero-scroll-indicator">
+            <span>↓</span>
+        </div>
+    </section>
 
-    <!-- 검색 & 필터 섹션 -->
-    <section class="search-section">
+    <!-- 인기 도구 섹션 -->
+    <section class="featured-section">
         <div class="container">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="AI 도구 검색... (예: 이미지, 글쓰기, 코딩)" class="search-input">
-                <button class="search-btn">🔍</button>
-            </div>
-            
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">전체</button>
-                <button class="filter-btn" data-category="writing">✍️ 글쓰기</button>
-                <button class="filter-btn" data-category="image">🎨 이미지</button>
-                <button class="filter-btn" data-category="video">🎬 영상</button>
-                <button class="filter-btn" data-category="coding">💻 코딩</button>
-                <button class="filter-btn" data-category="audio">🎵 음악/음성</button>
-                <button class="filter-btn" data-category="productivity">⚡ 생산성</button>
-                <button class="filter-btn" data-category="design">🎨 디자인</button>
-            </div>
-
-            <div class="filter-tags">
-                <button class="tag-btn active" data-price="all">전체</button>
-                <button class="tag-btn" data-price="free">무료만</button>
-                <button class="tag-btn" data-price="paid">유료만</button>
+            <h2 class="section-title">🔥 이주의 인기 도구</h2>
+            <div class="featured-grid" id="featuredGrid">
+                <!-- JavaScript로 동적 생성 -->
             </div>
         </div>
     </section>
 
-    <!-- 통계 섹션 -->
-    <section class="stats-section">
+    <!-- 검색 및 필터 -->
+    <section class="search-section" id="searchSection">
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalTools">150+</div>
-                    <div class="stat-label">AI 도구</div>
+            <div class="search-header">
+                <h2 class="section-title">🔍 AI 도구 찾기</h2>
+                <div class="view-mode-toggle">
+                    <button class="view-btn active" data-view="grid" onclick="changeView('grid')">
+                        <span>⊞</span> 그리드
+                    </button>
+                    <button class="view-btn" data-view="list" onclick="changeView('list')">
+                        <span>☰</span> 리스트
+                    </button>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">8</div>
-                    <div class="stat-label">카테고리</div>
+            </div>
+
+            <div class="search-container">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="도구 이름, 설명, 태그로 검색..."
+                    >
+                    <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">매일</div>
-                    <div class="stat-label">업데이트</div>
+            </div>
+
+            <!-- 고급 필터 -->
+            <div class="advanced-filters">
+                <div class="filter-group">
+                    <label class="filter-label">카테고리</label>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-category="all">전체</button>
+                        <button class="filter-btn" data-category="writing">✍️ 글쓰기</button>
+                        <button class="filter-btn" data-category="image">🎨 이미지</button>
+                        <button class="filter-btn" data-category="video">🎬 영상</button>
+                        <button class="filter-btn" data-category="coding">💻 코딩</button>
+                        <button class="filter-btn" data-category="audio">🎵 음성</button>
+                        <button class="filter-btn" data-category="productivity">⚡ 생산성</button>
+                        <button class="filter-btn" data-category="design">🎨 디자인</button>
+                    </div>
                 </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">가격</label>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-price="all">전체</button>
+                        <button class="filter-btn" data-price="free">무료</button>
+                        <button class="filter-btn" data-price="freemium">무료+유료</button>
+                        <button class="filter-btn" data-price="paid">유료</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">정렬</label>
+                    <select id="sortSelect" class="sort-select">
+                        <option value="popular">인기순</option>
+                        <option value="name">이름순</option>
+                        <option value="newest">최신순</option>
+                        <option value="rating">평점순 (준비중)</option>
+                    </select>
+                </div>
+
+                <div class="filter-actions">
+                    <button class="btn-compare" onclick="toggleCompareMode()" id="compareModeBtn">
+                        <span>⚖️</span> 비교하기 (<span id="compareCount">0</span>)
+                    </button>
+                    <button class="btn-reset" onclick="resetFilters()">
+                        🔄 필터 초기화
+                    </button>
+                </div>
+            </div>
+
+            <!-- 결과 카운트 -->
+            <div class="results-info">
+                <span id="resultsCount">200개의 AI 도구</span>
             </div>
         </div>
     </section>
 
-    <!-- AI 도구 카드 섹션 -->
+    <!-- 도구 그리드 -->
     <section class="tools-section">
         <div class="container">
-            <div class="section-header">
-                <h2>인기 AI 도구</h2>
-                <p class="result-count"><span id="resultCount">0</span>개의 도구를 찾았습니다</p>
-            </div>
-            
             <div class="tools-grid" id="toolsGrid">
                 <!-- JavaScript로 동적 생성 -->
             </div>
-
+            
             <div class="no-results" id="noResults" style="display: none;">
                 <div class="no-results-icon">🔍</div>
                 <h3>검색 결과가 없습니다</h3>
-                <p>다른 키워드로 검색해보세요</p>
+                <p>다른 키워드나 필터를 시도해보세요</p>
             </div>
         </div>
     </section>
 
-    <!-- 푸터 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2026 AI Tools Hub. All rights reserved.</p>
-                <p class="footer-note">매일 새로운 AI 도구가 추가됩니다 🚀</p>
-            </div>
+    <!-- 즐겨찾기 패널 -->
+    <div class="favorites-panel" id="favoritesPanel">
+        <div class="favorites-header">
+            <h3>⭐ 즐겨찾기</h3>
+            <button class="favorites-close" onclick="toggleFavoritesPanel()">✕</button>
         </div>
-    </footer>
+        <div class="favorites-content" id="favoritesContent">
+            <p class="favorites-empty">아직 즐겨찾기한 도구가 없습니다</p>
+        </div>
+    </div>
 
     <!-- 맨 위로 버튼 -->
     <button class="scroll-top" id="scrollTop">↑</button>
+
+    <!-- 비교 모달 -->
+    <div class="modal" id="compareModal">
+        <div class="modal-overlay" onclick="closeCompareModal()"></div>
+        <div class="modal-content compare-modal-content">
+            <button class="modal-close" onclick="closeCompareModal()">✕</button>
+            
+            <h2 class="compare-title">AI 도구 비교</h2>
+            <p class="compare-subtitle">선택한 도구들을 한눈에 비교해보세요</p>
+            
+            <div class="compare-grid" id="compareGrid">
+                <!-- JavaScript로 동적 생성 -->
+            </div>
+
+            <div class="compare-footer">
+                <button class="btn btn-secondary" onclick="closeCompareModal()">닫기</button>
+                <button class="btn btn-primary" onclick="clearComparison()">비교 초기화</button>
+            </div>
+        </div>
+    </div>
 
     <!-- 상세 정보 모달 -->
     <div class="modal" id="toolModal">
@@ -116,6 +234,9 @@
                         <span class="modal-date" id="modalDate">출시일</span>
                     </div>
                 </div>
+                <button class="favorite-btn" id="modalFavoriteBtn" onclick="toggleFavoriteFromModal()">
+                    <span class="favorite-icon">☆</span>
+                </button>
             </div>
 
             <div class="modal-body">
@@ -165,6 +286,37 @@
             </div>
         </div>
     </div>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="gradient-text">AI Tools Hub</h3>
+                    <p>2026년 최고의 AI 도구를 발견하세요</p>
+                </div>
+                <div class="footer-section">
+                    <h4>빠른 링크</h4>
+                    <ul>
+                        <li><a href="#searchSection">도구 찾기</a></li>
+                        <li><a href="https://github.com/Jaerong0704/my-first-tool" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>카테고리</h4>
+                    <ul>
+                        <li><a href="#" onclick="filterByCategory('writing')">글쓰기</a></li>
+                        <li><a href="#" onclick="filterByCategory('image')">이미지</a></li>
+                        <li><a href="#" onclick="filterByCategory('video')">영상</a></li>
+                        <li><a href="#" onclick="filterByCategory('coding')">코딩</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 AI Tools Hub. Made with ❤️</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>

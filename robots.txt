@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jaerong0704.github.io/my-first-tool/sitemap.xml
